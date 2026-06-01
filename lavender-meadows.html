@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lavender Meadows SMP</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --lav: #c9b8e8;
+    --lav-light: #ede5f8;
+    --lav-mid: #b39ddb;
+    --lav-dark: #7c5cbf;
+    --sage: #b5c9a8;
+    --blush: #f5d0d0;
+    --cream: #fdf8f0;
+    --brown: #7a5c45;
+    --text: #3d2b1f;
+    --muted: #7a6a6a;
+  }
+  body { font-family: 'Lora', Georgia, serif; background: var(--cream); color: var(--text); line-height: 1.7; }
+
+  /* NAV */
+  nav {
+    background: rgba(253,248,240,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #e0d3c8;
+    position: sticky; top: 0; z-index: 100;
+    padding: 0.75rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--lav-dark); display: flex; align-items: center; gap: 0.5rem; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.88rem; letter-spacing: 0.03em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--lav-dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 92vh;
+    background: radial-gradient(ellipse at 20% 60%, #ddd0f5 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 30%, #c8dfc2 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, #f5d8d8 0%, transparent 50%),
+                var(--cream);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 4rem 2rem 6rem; position: relative; overflow: hidden;
+  }
+  .hero-florets { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .floret { position: absolute; font-size: 1.4rem; opacity: 0.18; animation: float 6s ease-in-out infinite; }
+  .floret:nth-child(1) { top:10%; left:8%; animation-delay:0s; }
+  .floret:nth-child(2) { top:20%; right:12%; animation-delay:1s; font-size:1.1rem; }
+  .floret:nth-child(3) { bottom:25%; left:5%; animation-delay:2s; font-size:1rem; }
+  .floret:nth-child(4) { bottom:15%; right:8%; animation-delay:0.5s; }
+  .floret:nth-child(5) { top:50%; left:2%; animation-delay:3s; font-size:0.9rem; }
+  .floret:nth-child(6) { top:35%; right:4%; animation-delay:1.5s; font-size:1.2rem; }
+  .floret:nth-child(7) { bottom:40%; left:18%; animation-delay:2.5s; font-size:0.8rem; }
+  .floret:nth-child(8) { top:65%; right:20%; animation-delay:0.8s; font-size:1rem; }
+  @keyframes float { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-14px) rotate(5deg);} }
+
+  .hero-badge { display:inline-block; background:#ede5f8; color:var(--lav-dark); border:1px solid var(--lav); border-radius:999px; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.35rem 1.1rem; margin-bottom:1.5rem; }
+  .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,7vw,5rem); font-weight:600; color:var(--text); line-height:1.15; margin-bottom:1rem; position:relative; z-index:1; }
+  .hero h1 em { font-style:italic; color:var(--lav-dark); }
+  .hero p { font-size:1.1rem; color:var(--muted); max-width:480px; margin:0 auto 2.5rem; font-style:italic; }
+  .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; position:relative; z-index:1; }
+
+  .btn-primary { background:var(--lav-dark); color:#fff; border:none; border-radius:999px; padding:0.85rem 2rem; font-family:'Lora',serif; font-size:0.95rem; cursor:pointer; text-decoration:none; transition:background 0.2s,transform 0.15s; display:inline-flex; align-items:center; gap:0.5rem; }
+  .btn-primary:hover { background:#6b4aae; transform:translateY(-2px); }
+  .btn-discord { background:#5865F2; color:#fff; border:none; border-radius:999px; padding:0.85rem 2rem; font-family:'Lora',serif; font-size:0.95rem; cursor:pointer; text-decoration:none; transition:background 0.2s,transform 0.15s; display:inline-flex; align-items:center; gap:0.5rem; }
+  .btn-discord:hover { background:#4752c4; transform:translateY(-2px); }
+  .btn-outline { background:transparent; color:var(--lav-dark); border:1.5px solid var(--lav); border-radius:999px; padding:0.8rem 1.8rem; font-family:'Lora',serif; font-size:0.95rem; cursor:pointer; text-decoration:none; transition:background 0.2s,transform 0.15s; }
+  .btn-outline:hover { background:var(--lav-light); transform:translateY(-2px); }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-tag { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--lav-dark); margin-bottom:0.6rem; display:block; }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.6rem); font-weight:600; line-height:1.2; margin-bottom:1rem; }
+  .section-sub { color:var(--muted); font-style:italic; font-size:1rem; max-width:540px; margin-bottom:2.5rem; }
+
+  /* ABOUT */
+  .about-bg { background: radial-gradient(ellipse at 70% 50%, rgba(201,184,232,0.18) 0%, transparent 60%), var(--cream); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+  .about-text p { color:var(--muted); margin-bottom:1rem; }
+  .about-art { background:linear-gradient(135deg,#ede5f8 0%,#d6ecd1 60%,#f5d0d0 100%); border-radius:2rem; height:280px; display:flex; align-items:center; justify-content:center; font-size:5rem; border:1px solid rgba(179,157,219,0.3); position:relative; overflow:hidden; }
+  .about-art::after { content:'🌿 🌸 ✨'; position:absolute; bottom:1rem; right:1rem; font-size:1.2rem; opacity:0.5; }
+
+  /* FEATURES */
+  .features-bg { background:#f7f0fd; }
+  .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+  .feature-card { background:#fff; border:1px solid #e8dcf5; border-radius:1.25rem; padding:1.75rem 1.5rem; transition:transform 0.2s,box-shadow 0.2s; }
+  .feature-card:hover { transform:translateY(-4px); box-shadow:0 8px 30px rgba(180,150,220,0.15); }
+  .feature-icon { font-size:2rem; margin-bottom:0.75rem; display:block; }
+  .feature-card h3 { font-family:'Playfair Display',serif; font-size:1.1rem; margin-bottom:0.5rem; }
+  .feature-card p { font-size:0.88rem; color:var(--muted); }
+
+  /* HOW TO JOIN */
+  .join-bg { background: radial-gradient(ellipse at 30% 50%, rgba(181,201,168,0.2) 0%, transparent 60%), var(--cream); }
+  .steps { display:flex; flex-direction:column; gap:1.5rem; margin-top:2rem; }
+  .step { display:flex; gap:1.5rem; align-items:flex-start; background:#fff; border:1px solid #e8dcf5; border-radius:1rem; padding:1.5rem; }
+  .step-num { width:40px; height:40px; border-radius:50%; background:var(--lav-light); color:var(--lav-dark); font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .step-body h4 { font-family:'Playfair Display',serif; font-size:1rem; margin-bottom:0.25rem; }
+  .step-body p { font-size:0.88rem; color:var(--muted); }
+  .ip-box { display:inline-block; background:var(--lav-light); border:1.5px dashed var(--lav); border-radius:0.75rem; padding:0.4rem 1rem; font-family:monospace; font-size:1rem; color:var(--lav-dark); margin-top:0.4rem; letter-spacing:0.05em; }
+
+  /* RULES */
+  .rules-bg { background:#fdf3ec; }
+  .strike-info { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-bottom:2.5rem; }
+  .strike-card { border-radius:1rem; padding:1.25rem; text-align:center; }
+  .strike-card.warn { background:#fff8e1; border:1px solid #ffe082; }
+  .strike-card.timeout { background:#fff3e0; border:1px solid #ffcc80; }
+  .strike-card.ban { background:#fce4ec; border:1px solid #f48fb1; }
+  .strike-card .strike-icon { font-size:1.75rem; display:block; margin-bottom:0.4rem; }
+  .strike-card h4 { font-family:'Playfair Display',serif; font-size:0.95rem; margin-bottom:0.2rem; }
+  .strike-card p { font-size:0.78rem; color:var(--muted); }
+  .rules-list { list-style:none; display:flex; flex-direction:column; gap:0.75rem; }
+  .rule-item { background:#fff; border:1px solid #f0ddd5; border-radius:0.75rem; padding:1rem 1.25rem; display:flex; gap:1rem; align-items:flex-start; }
+  .rule-tag { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; font-size:0.75rem; font-weight:600; flex-shrink:0; margin-top:2px; }
+  .tag-warn { background:#fff8e1; color:#f57f17; }
+  .tag-timeout { background:#fff3e0; color:#e65100; }
+  .tag-ban { background:#fce4ec; color:#c62828; }
+  .rule-body { flex:1; }
+  .rule-body strong { font-family:'Playfair Display',serif; font-size:0.95rem; display:block; margin-bottom:0.2rem; }
+  .rule-body p { font-size:0.85rem; color:var(--muted); margin:0; }
+  .strike-badge { font-size:0.7rem; padding:0.15rem 0.5rem; border-radius:999px; margin-left:0.4rem; font-weight:500; }
+  .badge-warn { background:#fff8e1; color:#f57f17; }
+  .badge-timeout { background:#fff3e0; color:#e65100; }
+  .badge-ban { background:#fce4ec; color:#c62828; }
+
+  /* STAFF */
+  .staff-bg { background: radial-gradient(ellipse at 80% 20%, rgba(245,208,208,0.25) 0%, transparent 50%), #f7f0fd; }
+  .staff-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1.25rem; margin-top:2.5rem; }
+  .staff-card { background:#fff; border:1px solid #e8dcf5; border-radius:1.25rem; padding:1.5rem 1rem; text-align:center; transition:transform 0.2s; }
+  .staff-card:hover { transform:translateY(-4px); }
+  .staff-avatar { width:56px; height:56px; border-radius:50%; margin:0 auto 0.75rem; display:flex; align-items:center; justify-content:center; font-size:1.6rem; border:2px solid var(--lav); }
+  .staff-card h4 { font-family:'Playfair Display',serif; font-size:0.95rem; margin-bottom:0.25rem; word-break:break-word; }
+  .staff-role { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--lav-dark); }
+  .staff-subrole { font-size:0.7rem; color:var(--muted); margin-top:0.15rem; }
+
+  /* DISCORD CTA */
+  .discord-bg { background:linear-gradient(135deg,#ddd0f5 0%,#c8dfc2 60%,#f5d8d8 100%); }
+  .discord-cta { text-align:center; max-width:600px; margin:0 auto; }
+  .discord-cta h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.5rem); margin-bottom:1rem; }
+  .discord-cta p { color:var(--muted); font-style:italic; margin-bottom:2rem; }
+
+  /* FOOTER */
+  footer { background:var(--text); color:#d4c9c9; text-align:center; padding:2rem 1rem; font-size:0.85rem; line-height:2; }
+  footer a { color:var(--lav); text-decoration:none; }
+  footer a:hover { color:#e0d0ff; }
+  .footer-credit { margin-top:0.75rem; padding-top:0.75rem; border-top:1px solid rgba(255,255,255,0.1); font-size:0.78rem; color:#a090a0; }
+  .footer-credit a { color:#c9b8e8; }
+
+  @media (max-width:640px) {
+    .about-grid,.features-grid,.strike-info { grid-template-columns:1fr; }
+    .about-art { height:200px; }
+    nav { padding:0.75rem 1rem; }
+    .nav-links { gap:0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span>🌿</span> Lavender Meadows</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#join">Join</a></li>
+    <li><a href="#rules">Rules</a></li>
+    <li><a href="#staff">Staff</a></li>
+    <li><a href="#discord">Discord</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-florets">
+    <div class="floret">🌸</div><div class="floret">🌿</div><div class="floret">✨</div>
+    <div class="floret">🌼</div><div class="floret">🍃</div><div class="floret">💐</div>
+    <div class="floret">🌱</div><div class="floret">🦋</div>
+  </div>
+  <div class="hero-badge">✦ Minecraft SMP ✦</div>
+  <h1>Welcome to<br/><em>Lavender Meadows</em></h1>
+  <p>A cozy, community-driven Survival Multiplayer server where every adventure feels like home.</p>
+  <div class="hero-btns">
+    <a href="#join" class="btn-primary">🌿 How to Join</a>
+    <a href="https://discord.gg/f25pScBqPJ" class="btn-discord">Join our Discord</a>
+    <a href="#about" class="btn-outline">Learn More</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-bg">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="section-tag">✦ Our Story</span>
+        <h2 class="section-title">A meadow built by <em>friends</em></h2>
+        <p>Lavender Meadows is a warm, welcoming Minecraft SMP where creativity blooms and friendships grow. Whether you're a builder, farmer, adventurer, or just love hanging out — there's a place here for you.</p>
+        <p>We believe Minecraft is best when it's cozy. No toxic vibes, just good people, beautiful builds, and endless fields of lavender.</p>
+        <a href="#join" class="btn-primary" style="margin-top:1rem; display:inline-flex;">Start your journey 🌸</a>
+      </div>
+      <div class="about-art">🏡</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-bg">
+  <div class="section-inner">
+    <span class="section-tag">✦ What We Offer</span>
+    <h2 class="section-title">Life in the Meadows</h2>
+    <p class="section-sub">Everything you need for the perfect cozy SMP experience.</p>
+    <div class="features-grid">
+      <div class="feature-card"><span class="feature-icon">🏡</span><h3>Cozy Builds</h3><p>From cottages to castles, we celebrate every style. Share your builds with a welcoming community.</p></div>
+      <div class="feature-card"><span class="feature-icon">🤝</span><h3>Friendly Community</h3><p>Kind, active players who look out for each other. Our Discord is always buzzing with good vibes.</p></div>
+      <div class="feature-card"><span class="feature-icon">🌾</span><h3>Community Projects</h3><p>Join group builds, seasonal events, and community farms. There's always something to do together.</p></div>
+      <div class="feature-card"><span class="feature-icon">🛡️</span><h3>Grief Protection</h3><p>Your builds are safe with us. Active moderation and land claiming keeps your hard work protected.</p></div>
+      <div class="feature-card"><span class="feature-icon">🎉</span><h3>Regular Events</h3><p>Seasonal hunts, building contests, and community gatherings keep the meadow lively year-round.</p></div>
+      <div class="feature-card"><span class="feature-icon">🌙</span><h3>Chill Atmosphere</h3><p>No pressure, just play at your own pace. Whether you log in daily or once a week — you're always welcome.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO JOIN -->
+<section id="join" class="join-bg">
+  <div class="section-inner">
+    <span class="section-tag">✦ Get Started</span>
+    <h2 class="section-title">How to Join</h2>
+    <p class="section-sub">Three simple steps and you'll be roaming the meadows in no time.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Join our Discord</h4>
+          <p>Head to our Discord server and introduce yourself. Our community loves meeting new faces! <a href="https://discord.gg/f25pScBqPJ" style="color:var(--lav-dark);">discord.gg/f25pScBqPJ</a></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Read the Rules &amp; Pick Your Age Role</h4>
+          <p>Have a read through our server rules below and make sure you select your age role in Discord — it's required to access the server!</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Connect to the Server</h4>
+          <p>Launch Minecraft Java Edition and add our server IP:</p>
+          <div class="ip-box">create_new_era.exaroton.me</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section id="rules" class="rules-bg">
+  <div class="section-inner">
+    <span class="section-tag">✦ Server Rules</span>
+    <h2 class="section-title">Rules &amp; Strike System</h2>
+    <p class="section-sub">To be here we ask you follow our rules and Discord's official ToS. Rules are broken into offence tiers.</p>
+
+    <div class="strike-info">
+      <div class="strike-card warn">
+        <span class="strike-icon">⚠️</span>
+        <h4>First Offence → Warning</h4>
+        <p>R1, R3, R5, R8, R11, R12, R13</p>
+      </div>
+      <div class="strike-card timeout">
+        <span class="strike-icon">⏳</span>
+        <h4>Second Offence → Timeout</h4>
+        <p>R4, R6, R10</p>
+      </div>
+      <div class="strike-card ban">
+        <span class="strike-icon">🚫</span>
+        <h4>Third Offence → Ban</h4>
+        <p>R7, R2, R9, R14</p>
+      </div>
+    </div>
+
+    <ul class="rules-list">
+      <li class="rule-item">
+        <div class="rule-tag tag-warn">R1</div>
+        <div class="rule-body"><strong>No Disrespect, Racism or Hate <span class="strike-badge badge-warn">Warning</span></strong><p>No disrespect of any kind towards staff or other players. Keep this a kind and fun environment.</p></div>
+      </li>
+      <li class="rule-item">
+        <div class="rule-tag tag-ban">R2</div>
+        <div class="rule-body"><strong>No Violence <span class="strike-badge badge-ban">Immediate Ban</span></strong><p>Absolutely no violence. No threats of death, no imagery or media depicting or promoting violence, self-harm, or harm to anyone.</p></div>
+      </li>
+      <li class="rule-item">
+        <div class="rule-tag tag-warn">R3</div>
+        <div class="rule-body"><strong>Communicate! <span class="strike-badge badge-warn">Warning</span></strong><p>If you have an issue with staff, players or the game please communicate. It can't be resolved without asking for help.</p></div>
+      </li>
+      <li class="rule-item">
+        <div class="rule-tag tag-timeout">R4</div>
+        <div class="rule-body"><strong>No NSFW <span class="strike-badge badge-timeout">Timeout / Ban</span></strong><p>Zero tolerance for NSFW or explicit imagery, media or conversations. Respect that there are minors here.</p></div>
+      </li>
+      <li class="rule-item">
+        <div class="rule-tag tag-warn">R5</div>
+        <div class="rule-body"><strong>Voice Chat Etiquette <span class="strike-badge badge-warn">Warning</span></strong><p>Be respectful in voice channels. Don't yell, involve everyone, and make room for shyer members.</p></div>
+      </li>
+      <li class="rule-item">
+        <div class="rule-tag tag-timeout">R6</div>
+        <div class="rule-body"><strong>No Unapproved Promotion or Advertising <span class="strike-badge badge-timeout">Timeout</span></strong><p>If you want to promote something, ask a mod first — they'll run it by the Owners. Promoting without permission results in a timeout.</p></div>
+      </li>
+      <li class="rule-item">
+        <div class="rule-tag tag-ban">R7</div>
+        <div class="rule-body"><strong>No Illegal Activity <span class="strike-badge badge-ban">Immediate Ban</span></strong><p>Acting or speaking about involving yourself or others in illegal activities will result in an immediate ban.</p></div>
+      </li>
+      <li class="rule-item">
+        <div class="rule-tag tag-warn">R8</div>
+        <div class="rule-body"><strong>No Spam or Mass Pinging <span class="strike-badge badge-warn">Warning / Mute</span></strong><p>Refrain from spamming or mass pinging people in the server.</p></div>
+      </li>
+      <li class="rule-item">
+        <div class="rule-tag tag-ban">R9</div>
+        <div class="rule-body"><strong>No Sexual Behaviour Towards Minors <span class="strike-badge badge-ban">Immediate Ban</span></strong><p>Absolutely zero sexual comments to anybody — especially minors. This results in an immediate ban.</p></div>
+      </li>
+      <li class="rule-item">
+        <div class="rule-tag tag-timeout">R10</div>
+        <div class="rule-body"><strong>Age Role Required <span class="strike-badge badge-timeout">Warning → Timeout</span></strong><p>Select your age role in Discord. Without it you'll receive a reminder, then a warning, then a timeout.</p></div>
+      </li>
+      <li class="rule-item">
+        <div class="rule-tag tag-warn">R11</div>
+        <div class="rule-body"><strong>No Excessive Foul Language <span class="strike-badge badge-warn">Warning</span></strong><p>You're allowed to swear, but be mindful — not everyone is comfortable with excessive cursing in chat or VC.</p></div>
+      </li>
+      <li class="rule-item">
+        <div class="rule-tag tag-warn">R12</div>
+        <div class="rule-body"><strong>Be Smart <span class="strike-badge badge-warn">Warning</span></strong><p>If you think it's rude, don't say or do it. Use common sense — not everything needs to be said.</p></div>
+      </li>
+      <li class="rule-item">
+        <div class="rule-tag tag-warn">R13</div>
+        <div class="rule-body"><strong>Soundboard Use <span class="strike-badge badge-warn">Warning</span></strong><p>Soundboards are monitored. All VC rules apply — no slurs, inappropriate sounds, or spamming.</p></div>
+      </li>
+      <li class="rule-item">
+        <div class="rule-tag tag-ban">R14</div>
+        <div class="rule-body"><strong>No Slurs <span class="strike-badge badge-ban">Immediate Ban</span></strong><p>Slurs of any kind will not be tolerated, regardless of who you are or any claim of permission to say them.</p></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- STAFF -->
+<section id="staff" class="staff-bg">
+  <div class="section-inner">
+    <span class="section-tag">✦ The Team</span>
+    <h2 class="section-title">Meet the Staff</h2>
+    <p class="section-sub">The gardeners who keep the meadows blooming.</p>
+    <div class="staff-grid">
+      <div class="staff-card">
+        <div class="staff-avatar" style="background:#ede5f8;">👑</div>
+        <h4>Icycdead</h4>
+        <div class="staff-role">Owner</div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-avatar" style="background:#e4eedf;">🌐</div>
+        <h4>ABC</h4>
+        <div class="staff-role">Website Manager</div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-avatar" style="background:#fde8e8;">⚙️</div>
+        <h4>NewFound</h4>
+        <div class="staff-role">Server Tech</div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-avatar" style="background:#ede5f8;">🦊</div>
+        <h4>Foxy</h4>
+        <div class="staff-role">Admin</div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-avatar" style="background:#e8edf8;">🌙</div>
+        <h4>Silver</h4>
+        <div class="staff-role">Admin</div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-avatar" style="background:#fdf3ec;">🍁</div>
+        <h4>Maple-Syrup</h4>
+        <div class="staff-role">Admin</div>
+        <div class="staff-subrole">Advertising Team</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCORD CTA -->
+<section id="discord" class="discord-bg">
+  <div class="section-inner discord-cta">
+    <h2>Ready to bloom? 🌿</h2>
+    <p>Join our community on Discord — introductions, events, announcements and more await.</p>
+    <a href="https://discord.gg/f25pScBqPJ" class="btn-discord" style="font-size:1.05rem; padding:1rem 2.5rem;">Join the Discord Server</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>🌿 Lavender Meadows SMP &nbsp;·&nbsp; <a href="#rules">Rules</a> &nbsp;·&nbsp; <a href="#staff">Staff</a> &nbsp;·&nbsp; <a href="https://discord.gg/f25pScBqPJ">Discord</a></p>
+  <div class="footer-credit">Made by <a href="https://website.abcstudios.run.place/" target="_blank">ABC Websites</a> &nbsp;·&nbsp; By ABC</div>
+</footer>
+
+</body>
+</html>
